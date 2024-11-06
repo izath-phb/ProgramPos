@@ -493,6 +493,7 @@ public class Profile_admin extends javax.swing.JFrame {
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
       int n = tabelUser.getSelectedRow();
+      
         if(n != -1){
             int id = Integer.parseInt(tabelUser.getValueAt(n, 1).toString());
             String fullname = tabelUser.getValueAt(n, 2).toString();
