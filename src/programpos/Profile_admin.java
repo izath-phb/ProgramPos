@@ -43,6 +43,7 @@ public class Profile_admin extends javax.swing.JFrame {
         
         settingTable();        
         viewData("");
+      
 
     }
 
@@ -127,9 +128,9 @@ public class Profile_admin extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(107, 107, 107)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(509, 509, 509)
+                .addGap(420, 420, 420)
                 .addComponent(labelName)
-                .addGap(99, 99, 99)
+                .addGap(65, 65, 65)
                 .addComponent(btn_logout)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -157,7 +158,7 @@ public class Profile_admin extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 537, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanel8.setBackground(new java.awt.Color(102, 0, 255));
@@ -206,6 +207,11 @@ public class Profile_admin extends javax.swing.JFrame {
         pencarian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pencarianActionPerformed(evt);
+            }
+        });
+        pencarian.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pencarianKeyReleased(evt);
             }
         });
         jPanel3.add(pencarian, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 40));
@@ -377,8 +383,8 @@ public class Profile_admin extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -392,7 +398,7 @@ public class Profile_admin extends javax.swing.JFrame {
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 419, Short.MAX_VALUE)
+            .addGap(0, 496, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Data Transaksi", jPanel7);
@@ -412,13 +418,11 @@ public class Profile_admin extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTabbedPane1)
                         .addContainerGap())))
         );
 
@@ -434,8 +438,8 @@ public class Profile_admin extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -449,7 +453,12 @@ public class Profile_admin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_logoutActionPerformed
 
     private void pencarianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pencarianActionPerformed
-        // TODO add your handling code here:
+        String key = pencarian.getText().trim();
+        if (!key.isEmpty()) {
+            viewData(key);
+        }else{
+            viewData("");
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_pencarianActionPerformed
 
     private void tambahuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahuserActionPerformed
@@ -493,24 +502,11 @@ public class Profile_admin extends javax.swing.JFrame {
     }//GEN-LAST:event_refreshActionPerformed
 
     private void ubahuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahuserActionPerformed
-     int n = tabelUser.getSelectedRow();
-        if(n != -1){
-            int id = Integer.parseInt(tabelUser.getValueAt(n, 1).toString());
-            String fullname = tabelUser.getValueAt(n, 2).toString();
-            String username = tabelUser.getValueAt(n, 3).toString();
-            String password = tabelUser.getValueAt(n, 4).toString();
-            String role = tabelUser.getValueAt(n, 5).toString();
-            ubahdata U = new ubahdata(this, true);
-            U.setId_akun(id); 
-            U.setFullname(fullname);
-            U.setUsername(username);
-            U.setPassword(password); 
-            U.setrole(role); 
-            U.setVisible(true); 
-            
-        }else {
-            JOptionPane.showMessageDialog(this, "Anda belum memilih data");
-        }
+    ubahdata T = new ubahdata(this, true);
+    T.setVisible(true);
+   
+// TODO add your handling code here:
+    
     }//GEN-LAST:event_ubahuserActionPerformed
 
     private void tbltambahprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbltambahprodukActionPerformed
@@ -520,7 +516,22 @@ public class Profile_admin extends javax.swing.JFrame {
     }//GEN-LAST:event_tbltambahprodukActionPerformed
 
     private void tblubahprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tblubahprodukActionPerformed
-        // TODO add your handling code here:
+ int n = tabelUser.getSelectedRow();
+        if(n != -1){
+            int id = Integer.parseInt(tabelUser.getValueAt(n, 1).toString());
+            String username = tabelUser.getValueAt(n, 2).toString();
+            String password = tabelUser.getValueAt(n, 3).toString();
+            String role = tabelUser.getValueAt(n, 4).toString();
+            ubahdata U = new ubahdata(this, true);
+            U.setId_akun(id); 
+            U.setUsername(username);
+            U.setPassword(password); 
+            U.setrole(role); 
+            U.setVisible(true); 
+            
+        }else {
+            JOptionPane.showMessageDialog(this, "Anda belum memilih data");
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_tblubahprodukActionPerformed
 
     private void tblhapusprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tblhapusprodukActionPerformed
@@ -534,6 +545,16 @@ public class Profile_admin extends javax.swing.JFrame {
     private void pencarianprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pencarianprodukActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pencarianprodukActionPerformed
+
+    private void pencarianKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pencarianKeyReleased
+String key = pencarian.getText();
+        String where = "WHERE "
+                + "fullname LIKE '%" + key + "%' OR "
+                + "username LIKE '%" + key + "%' OR "
+                + "password LIKE '%" + key + "%' OR "
+                + "level LIKE '%" + key + "%'";
+        viewData(where);        // TODO add your handling code here:
+    }//GEN-LAST:event_pencarianKeyReleased
 
     /**
      * @param args the command line arguments
@@ -636,6 +657,7 @@ public class Profile_admin extends javax.swing.JFrame {
             //error handling
         }
     }
+     
      
       private void settingTable() {
         m = (DefaultTableModel) tabelUser.getModel();        

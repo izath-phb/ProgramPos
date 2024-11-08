@@ -148,33 +148,48 @@ public class ubahdata extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnsimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsimpanActionPerformed
-        String fullName = txtFullname.getText();
+                                          
         String username = txtUsername.getText();
         String password = new String(txtPassword.getPassword());
-        String role = txtRole.getSelectedItem().toString();
+        String nama_role = txtRole.getSelectedItem().toString();
+//        int role;
+//        
+//        switch (nama_role) {
+//            case "Admin":
+//                role = 1;
+//                break;
+//            case "Kasir":
+//                role = 2;
+//                break;
+//            case "Owner":
+//                role = 3;
+//                break;
+//            default:
+//                throw new AssertionError();
+//        }
         
         String Q = "UPDATE akun "
-                + "set fullname=?,"
-                + "username=?,"
+                + "set username=?,"
                 + "password=?,"
                 + "role=? "
                 + "WHERE id=?";
         try {
             Connection K = connect.konek();
             PreparedStatement P = K.prepareStatement(Q);
-            P.setString(1, fullName);
-            P.setString(2, username);
-            P.setString(3, password);
-            P.setString(4, role);
-            P.setInt(5, getId_akun());
+            P.setString(1, username);
+            P.setString(2, password);
+            P.setString(3, nama_role);
+            P.setInt(4,getId_akun());
             P.executeUpdate();
             
             Profile_admin.viewData(""); 
             JOptionPane.showMessageDialog(this, "Data berhasil disimpan");
-            txtFullname.requestFocus();
+            setVisible(false);
+            dispose();
         } catch (HeadlessException | SQLException e) {
-            //
+            JOptionPane.showMessageDialog(this, "Terjadi Kesalahan [UD-173]:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_btnsimpanActionPerformed
 
     private void btnbatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbatalActionPerformed
@@ -254,7 +269,7 @@ public class ubahdata extends javax.swing.JDialog {
         return id_akun;
     }
 
-    public void setId_akun(int idUser) {
+    public void setId_akun(int id_akun) {
         this.id_akun = id_akun;
     }
 

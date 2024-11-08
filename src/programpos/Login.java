@@ -262,7 +262,6 @@ public class Login extends javax.swing.JFrame {
                 //JOptionPane.showMessageDialog(this, "Sukses Login");
                 if (P.getrole().equals("admin")) {
                     Profile_admin O = new Profile_admin(P);
-                
                     this.setVisible(false);
                     O.setVisible(true);
 //                } else if (P.getrole().equals("owner")) {
