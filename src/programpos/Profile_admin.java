@@ -73,10 +73,10 @@ public class Profile_admin extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        tambahuser = new javax.swing.JToggleButton();
+        ubahuser = new javax.swing.JToggleButton();
         hapususer = new javax.swing.JToggleButton();
-        jToggleButton4 = new javax.swing.JToggleButton();
+        refresh = new javax.swing.JToggleButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         pencarian = new javax.swing.JTextField();
@@ -157,26 +157,26 @@ public class Profile_admin extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 537, Short.MAX_VALUE)
         );
 
         jPanel8.setBackground(new java.awt.Color(102, 0, 255));
 
-        jToggleButton1.setBackground(new java.awt.Color(153, 102, 0));
-        jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jToggleButton1.setText("Tambah");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        tambahuser.setBackground(new java.awt.Color(153, 102, 0));
+        tambahuser.setForeground(new java.awt.Color(255, 255, 255));
+        tambahuser.setText("Tambah");
+        tambahuser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                tambahuserActionPerformed(evt);
             }
         });
 
-        jToggleButton2.setBackground(new java.awt.Color(153, 102, 0));
-        jToggleButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jToggleButton2.setText("Ubah");
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+        ubahuser.setBackground(new java.awt.Color(153, 102, 0));
+        ubahuser.setForeground(new java.awt.Color(255, 255, 255));
+        ubahuser.setText("Ubah");
+        ubahuser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
+                ubahuserActionPerformed(evt);
             }
         });
 
@@ -189,12 +189,12 @@ public class Profile_admin extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton4.setBackground(new java.awt.Color(153, 102, 0));
-        jToggleButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jToggleButton4.setText("Refresh");
-        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
+        refresh.setBackground(new java.awt.Color(153, 102, 0));
+        refresh.setForeground(new java.awt.Color(255, 255, 255));
+        refresh.setText("Refresh");
+        refresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton4ActionPerformed(evt);
+                refreshActionPerformed(evt);
             }
         });
 
@@ -216,13 +216,13 @@ public class Profile_admin extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tambahuser, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ubahuser, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(hapususer, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
-                .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(491, Short.MAX_VALUE))
@@ -233,9 +233,9 @@ public class Profile_admin extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jToggleButton1)
-                        .addComponent(jToggleButton4)
-                        .addComponent(jToggleButton2)
+                        .addComponent(tambahuser)
+                        .addComponent(refresh)
+                        .addComponent(ubahuser)
                         .addComponent(hapususer))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(42, Short.MAX_VALUE))
@@ -404,18 +404,22 @@ public class Profile_admin extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -448,11 +452,10 @@ public class Profile_admin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pencarianActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
-        tambahdata T = new tambahdata(this, true);
-        T.setVisible(true);
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    private void tambahuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahuserActionPerformed
+       tambahdata T = new tambahdata(this, true);
+       T.setVisible(true); 
+    }//GEN-LAST:event_tambahuserActionPerformed
 
     private void hapususerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapususerActionPerformed
       int n = tabelUser.getSelectedRow();
@@ -460,8 +463,7 @@ public class Profile_admin extends javax.swing.JFrame {
             int id = Integer.parseInt(tabelUser.getValueAt(n, 1).toString());
             System.out.println(id);
             String fullname = tabelUser.getValueAt(n, 2).toString();
-            
-            
+
             int opsi = JOptionPane.showConfirmDialog(this, 
                     "Apakah Anda yakin ingin menghapus data "+fullname+"?", 
                     "Hapus Data", 
@@ -469,9 +471,7 @@ public class Profile_admin extends javax.swing.JFrame {
             if(opsi == 0){
                 String Q = "DELETE FROM akun "
                         + "WHERE id_akun="+id;
-                
                 System.out.println(Q);
-                
                 try {
                     java.sql.Connection K = connect.konek();
                     Statement S = K.createStatement();
@@ -487,13 +487,13 @@ public class Profile_admin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_hapususerActionPerformed
 
-    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
+    private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
         // TODO add your handling code here:
         viewData("");
-    }//GEN-LAST:event_jToggleButton4ActionPerformed
+    }//GEN-LAST:event_refreshActionPerformed
 
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-      int n = tabelUser.getSelectedRow();
+    private void ubahuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahuserActionPerformed
+     int n = tabelUser.getSelectedRow();
         if(n != -1){
             int id = Integer.parseInt(tabelUser.getValueAt(n, 1).toString());
             String fullname = tabelUser.getValueAt(n, 2).toString();
@@ -511,7 +511,7 @@ public class Profile_admin extends javax.swing.JFrame {
         }else {
             JOptionPane.showMessageDialog(this, "Anda belum memilih data");
         }
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
+    }//GEN-LAST:event_ubahuserActionPerformed
 
     private void tbltambahprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbltambahprodukActionPerformed
         tambahproduk TP = new tambahproduk(this, true);
@@ -594,18 +594,18 @@ public class Profile_admin extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton4;
     private javax.swing.JLabel labelName;
     private javax.swing.JTextField pencarian;
     private javax.swing.JTextField pencarianproduk;
+    private javax.swing.JToggleButton refresh;
     private javax.swing.JTable tabelUser;
     private javax.swing.JTable tabelUser1;
+    private javax.swing.JToggleButton tambahuser;
     private javax.swing.JToggleButton tblhapusproduk;
     private javax.swing.JToggleButton tblrefreshproduk;
     private javax.swing.JToggleButton tbltambahproduk;
     private javax.swing.JToggleButton tblubahproduk;
+    private javax.swing.JToggleButton ubahuser;
     // End of variables declaration//GEN-END:variables
      public static void viewData(String where) {
         try {

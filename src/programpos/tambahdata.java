@@ -39,10 +39,10 @@ public class tambahdata extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         txtFullname = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
         btnSimpan = new javax.swing.JButton();
         btnBatal = new javax.swing.JButton();
         txtRole = new javax.swing.JComboBox<>();
+        txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -66,12 +66,6 @@ public class tambahdata extends javax.swing.JDialog {
         txtFullname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFullnameActionPerformed(evt);
-            }
-        });
-
-        txtPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordActionPerformed(evt);
             }
         });
 
@@ -123,8 +117,8 @@ public class tambahdata extends javax.swing.JDialog {
                                 .addComponent(jLabel4))
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                                .addComponent(txtRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(txtRole, 0, 192, Short.MAX_VALUE)
+                                .addComponent(txtPassword)))))
                 .addContainerGap(91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -140,8 +134,8 @@ public class tambahdata extends javax.swing.JDialog {
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -164,42 +158,31 @@ public class tambahdata extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFullnameActionPerformed
 
-    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPasswordActionPerformed
-
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // TODO add your handling code here:
-        String nama_lengkap = txtFullname.getText();
+          String fullName = txtFullname.getText();
         String username = txtUsername.getText();
-        String password = txtPassword.getText();
+        String password = new String(txtPassword.getPassword());
         String role = txtRole.getSelectedItem().toString();
         
-       
+        String Q = "INSERT INTO akun "
+                + "(fullname,username,password,role) "
+                + "VALUES "
+                + "(?,?,?,?)";
         try {
-            
-            String Q = "INSERT INTO akun (fullname,username,password,role) VALUES (?,?,?,?)";
-//            java.sql.Connection K = connect.konek(); 
-//            PreparedStatement S = K.createStatement(Q);
-            Connection K = (Connection) connect.konek();
+            Connection K = connect.konek();
             PreparedStatement P = K.prepareStatement(Q);
-            P.setString(1, nama_lengkap);
+            P.setString(1, fullName);
             P.setString(2, username);
             P.setString(3, password);
             P.setString(4, role);
             P.executeUpdate();
             
-//            Profile_admin pa = new Profile_admin();
-            this.setVisible(false);
-//            pa.setVisible(true);
-//            pa.viewData("");
-            
-            
-//            AdminPage.viewData(""); 
-//            JOptionPane.showMessageDialog(this, "Data berhasil disimpan");
-//            txtFullname.requestFocus();
+            Profile_admin.viewData(""); 
+            JOptionPane.showMessageDialog(this, "Data berhasil disimpan");
+            txtFullname.requestFocus();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            //
         }
         
     }//GEN-LAST:event_btnSimpanActionPerformed
@@ -264,7 +247,7 @@ public class tambahdata extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField txtFullname;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JComboBox<String> txtRole;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables

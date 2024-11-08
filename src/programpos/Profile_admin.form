@@ -66,9 +66,9 @@
               <Component id="jPanel2" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="jTabbedPane1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -76,10 +76,16 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel4" max="32767" attributes="0"/>
-                      <Component id="jTabbedPane1" min="-2" pref="454" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jPanel4" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jTabbedPane1" min="-2" pref="454" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
           </Group>
@@ -173,7 +179,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="537" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -226,13 +232,13 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                              <Component id="jToggleButton1" min="-2" pref="77" max="-2" attributes="0"/>
+                              <Component id="tambahuser" min="-2" pref="77" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jToggleButton2" min="-2" pref="77" max="-2" attributes="0"/>
+                              <Component id="ubahuser" min="-2" pref="77" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="hapususer" min="-2" pref="77" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                              <Component id="jToggleButton4" min="-2" pref="77" max="-2" attributes="0"/>
+                              <Component id="refresh" min="-2" pref="77" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="491" max="32767" attributes="0"/>
@@ -245,9 +251,9 @@
                               <EmptySpace min="17" pref="17" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                      <Component id="jToggleButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jToggleButton4" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jToggleButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tambahuser" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="refresh" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ubahuser" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="hapususer" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jPanel3" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -258,7 +264,7 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JToggleButton" name="jToggleButton1">
+                    <Component class="javax.swing.JToggleButton" name="tambahuser">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="0" green="66" red="99" type="rgb"/>
@@ -269,10 +275,10 @@
                         <Property name="text" type="java.lang.String" value="Tambah"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tambahuserActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JToggleButton" name="jToggleButton2">
+                    <Component class="javax.swing.JToggleButton" name="ubahuser">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="0" green="66" red="99" type="rgb"/>
@@ -283,7 +289,7 @@
                         <Property name="text" type="java.lang.String" value="Ubah"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton2ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ubahuserActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JToggleButton" name="hapususer">
@@ -300,7 +306,7 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hapususerActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JToggleButton" name="jToggleButton4">
+                    <Component class="javax.swing.JToggleButton" name="refresh">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="0" green="66" red="99" type="rgb"/>
@@ -311,7 +317,7 @@
                         <Property name="text" type="java.lang.String" value="Refresh"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton4ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="refreshActionPerformed"/>
                       </Events>
                     </Component>
                     <Container class="javax.swing.JPanel" name="jPanel3">

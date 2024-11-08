@@ -46,12 +46,12 @@ public class ubahdata extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        TxtFullname = new javax.swing.JTextField();
+        txtFullname = new javax.swing.JTextField();
         txtUsername = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
         btnsimpan = new javax.swing.JButton();
         btnbatal = new javax.swing.JButton();
         txtRole = new javax.swing.JComboBox<>();
+        txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -68,9 +68,9 @@ public class ubahdata extends javax.swing.JDialog {
 
         jLabel4.setText("password");
 
-        TxtFullname.addActionListener(new java.awt.event.ActionListener() {
+        txtFullname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtFullnameActionPerformed(evt);
+                txtFullnameActionPerformed(evt);
             }
         });
 
@@ -108,12 +108,11 @@ public class ubahdata extends javax.swing.JDialog {
                             .addComponent(jLabel3)
                             .addComponent(jLabel1))
                         .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TxtFullname, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                                .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                                .addComponent(txtRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtFullname, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                            .addComponent(txtRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtPassword))))
                 .addContainerGap(72, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -124,17 +123,17 @@ public class ubahdata extends javax.swing.JDialog {
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(TxtFullname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtFullname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(64, 64, 64)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(34, 34, 34)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -149,18 +148,17 @@ public class ubahdata extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnsimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsimpanActionPerformed
-        
-        String fullName = TxtFullname.getText();
+        String fullName = txtFullname.getText();
         String username = txtUsername.getText();
-        String pass = new String(txtPassword.getText());
-        String roles = (String) txtRole.getSelectedItem();
+        String password = new String(txtPassword.getPassword());
+        String role = txtRole.getSelectedItem().toString();
         
         String Q = "UPDATE akun "
                 + "set fullname=?,"
                 + "username=?,"
                 + "password=?,"
                 + "role=? "
-                + "WHERE id_akun=?";
+                + "WHERE id=?";
         try {
             Connection K = connect.konek();
             PreparedStatement P = K.prepareStatement(Q);
@@ -173,7 +171,7 @@ public class ubahdata extends javax.swing.JDialog {
             
             Profile_admin.viewData(""); 
             JOptionPane.showMessageDialog(this, "Data berhasil disimpan");
-            TxtFullname.requestFocus();
+            txtFullname.requestFocus();
         } catch (HeadlessException | SQLException e) {
             //
         }
@@ -185,7 +183,7 @@ public class ubahdata extends javax.swing.JDialog {
     }//GEN-LAST:event_btnbatalActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        TxtFullname.setText(getFullname()); 
+        txtFullname.setText(getFullname()); 
         txtUsername.setText(getUsername()); 
         txtPassword.setText(getPassword()); 
         
@@ -193,9 +191,9 @@ public class ubahdata extends javax.swing.JDialog {
         txtRole.setSelectedItem(L); 
     }//GEN-LAST:event_formWindowOpened
 
-    private void TxtFullnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFullnameActionPerformed
+    private void txtFullnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFullnameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtFullnameActionPerformed
+    }//GEN-LAST:event_txtFullnameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,14 +238,14 @@ public class ubahdata extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TxtFullname;
     private javax.swing.JButton btnbatal;
     private javax.swing.JButton btnsimpan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JTextField txtFullname;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JComboBox<String> txtRole;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
