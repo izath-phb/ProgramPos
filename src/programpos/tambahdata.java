@@ -181,7 +181,7 @@ public class tambahdata extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Data berhasil disimpan");
             txtFullname.requestFocus();
         } catch (Exception e) {
-            //
+           e.printStackTrace();
         }
         
     }//GEN-LAST:event_btnSimpanActionPerformed

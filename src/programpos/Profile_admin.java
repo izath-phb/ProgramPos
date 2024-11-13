@@ -753,7 +753,7 @@ String key = pencarianproduk.getText();
                 no++;  
             }
         } catch (SQLException e) {
-            
+           e.printStackTrace();
         }
     }
      

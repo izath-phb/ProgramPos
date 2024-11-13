@@ -177,7 +177,7 @@ public class tambahproduk extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Data berhasil disimpan");
             txtnama_produk.requestFocus();
         } catch (Exception e) {
-            //
+            e.printStackTrace();
         }
    // TODO add your handling code here:
     }//GEN-LAST:event_tambah_produkActionPerformed
