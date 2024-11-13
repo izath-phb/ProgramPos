@@ -152,6 +152,7 @@ public class ubahdata extends javax.swing.JDialog {
         String username = txtUsername.getText();
         String password = new String(txtPassword.getPassword());
         String nama_role = txtRole.getSelectedItem().toString();
+        String fullname = txtFullname.getText();
 //        int role;
 //        
 //        switch (nama_role) {
@@ -170,16 +171,18 @@ public class ubahdata extends javax.swing.JDialog {
         
         String Q = "UPDATE akun "
                 + "set username=?,"
+                + "fullname=?,"
                 + "password=?,"
                 + "role=? "
-                + "WHERE id=?";
+                + "WHERE id_akun=?";
         try {
             Connection K = connect.konek();
             PreparedStatement P = K.prepareStatement(Q);
             P.setString(1, username);
-            P.setString(2, password);
-            P.setString(3, nama_role);
-            P.setInt(4,getId_akun());
+            P.setString(2, fullname);
+            P.setString(3, password);
+            P.setString(4, nama_role);
+            P.setInt(5,getId_akun());
             P.executeUpdate();
             
             Profile_admin.viewData(""); 
@@ -301,7 +304,7 @@ public class ubahdata extends javax.swing.JDialog {
         return role;
     }
 
-    public void setrole(String level) {
+    public void setrole(String role) {
         this.role = role;
     }
 

@@ -19,8 +19,10 @@ import javax.swing.JOptionPane;
  * @author Lenovo
  */
 public class Profile_admin extends javax.swing.JFrame {
-    static DefaultTableModel m;
     Profile P;
+
+    static DefaultTableModel pr;
+    static DefaultTableModel dd;
 
   
     
@@ -28,20 +30,13 @@ public class Profile_admin extends javax.swing.JFrame {
     /**
      * Creates new form Profile
      */
-//    public Profile_admin(String username, String role, String password, String nama_lengkap) {
-//        this.username = username;
-//        this.role = role;
-//        initComponents();
-//        labelName.setText("Selamat Datang " + nama_lengkap + " " + "(" + role + ")");
-//        setExtendedState(JFrame.MAXIMIZED_BOTH);
-//        viewData("");
-//        settingTable();
-//    }
+
     
         public Profile_admin() {
         initComponents();
         
-        settingTable();        
+        settingTable(); 
+
         viewData("");
       
 
@@ -50,10 +45,12 @@ public class Profile_admin extends javax.swing.JFrame {
     public Profile_admin(Profile P) {
         initComponents();
         labelName.setText("Selamat Datang" + " " + P.getFullname() + "(" + P.getrole() + ")");
-        settingTable();        
+        settingTable();  
         viewData("");
+        viewDataProduk("");
 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -89,11 +86,11 @@ public class Profile_admin extends javax.swing.JFrame {
         tblubahproduk = new javax.swing.JToggleButton();
         tblhapusproduk = new javax.swing.JToggleButton();
         tblrefreshproduk = new javax.swing.JToggleButton();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         pencarianproduk = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tabelUser1 = new javax.swing.JTable();
+        tabelProduk = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
 
         jLabel1.setText("jLabel1");
@@ -316,17 +313,22 @@ public class Profile_admin extends javax.swing.JFrame {
             }
         });
 
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/programpos/Search.png"))); // NOI18N
-        jPanel10.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, -1, -1));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/programpos/Search.png"))); // NOI18N
+        jPanel11.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, -1, -1));
 
         pencarianproduk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pencarianprodukActionPerformed(evt);
             }
         });
-        jPanel10.add(pencarianproduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 40));
+        pencarianproduk.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pencarianprodukKeyReleased(evt);
+            }
+        });
+        jPanel11.add(pencarianproduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 40));
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -341,8 +343,8 @@ public class Profile_admin extends javax.swing.JFrame {
                 .addComponent(tblhapusproduk, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
                 .addComponent(tblrefreshproduk, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -350,24 +352,24 @@ public class Profile_admin extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(tbltambahproduk)
                         .addComponent(tblrefreshproduk)
                         .addComponent(tblubahproduk)
                         .addComponent(tblhapusproduk)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
-        tabelUser1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelProduk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "no", "id_produk", "nama produk", "harga", "stok", "deskripsi"
+                "no", "id_produk", "nama produk", "harga beli", "harga jual", "stok", "deskripsi"
             }
         ));
-        jScrollPane2.setViewportView(tabelUser1);
+        jScrollPane2.setViewportView(tabelProduk);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -376,7 +378,7 @@ public class Profile_admin extends javax.swing.JFrame {
             .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 485, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -502,10 +504,24 @@ public class Profile_admin extends javax.swing.JFrame {
     }//GEN-LAST:event_refreshActionPerformed
 
     private void ubahuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahuserActionPerformed
-    ubahdata T = new ubahdata(this, true);
-    T.setVisible(true);
-   
-// TODO add your handling code here:
+       int n = tabelUser.getSelectedRow();
+        if(n != -1){
+            int id = Integer.parseInt(tabelUser.getValueAt(n, 1).toString());
+            String fullname = tabelUser.getValueAt(n, 2).toString();
+            String username = tabelUser.getValueAt(n, 3).toString();
+            String password = tabelUser.getValueAt(n, 4).toString();
+            String level = tabelUser.getValueAt(n, 5).toString();
+            ubahdata U = new ubahdata(this, true);
+            U.setId_akun(id); 
+            U.setFullname(fullname);
+            U.setUsername(username);
+            U.setPassword(password); 
+            U.setrole(level); 
+            U.setVisible(true); 
+            
+        }else {
+            JOptionPane.showMessageDialog(this, "Anda belum memilih data");
+        }
     
     }//GEN-LAST:event_ubahuserActionPerformed
 
@@ -516,35 +532,64 @@ public class Profile_admin extends javax.swing.JFrame {
     }//GEN-LAST:event_tbltambahprodukActionPerformed
 
     private void tblubahprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tblubahprodukActionPerformed
- int n = tabelUser.getSelectedRow();
-        if(n != -1){
-            int id = Integer.parseInt(tabelUser.getValueAt(n, 1).toString());
-            String username = tabelUser.getValueAt(n, 2).toString();
-            String password = tabelUser.getValueAt(n, 3).toString();
-            String role = tabelUser.getValueAt(n, 4).toString();
-            ubahdata U = new ubahdata(this, true);
-            U.setId_akun(id); 
-            U.setUsername(username);
-            U.setPassword(password); 
-            U.setrole(role); 
-            U.setVisible(true); 
-            
-        }else {
-            JOptionPane.showMessageDialog(this, "Anda belum memilih data");
-        }        // TODO add your handling code here:
+                                              
+   int n = tabelProduk.getSelectedRow();
+if (n != -1) {
+  
+    String nama_produk = tabelProduk.getValueAt(n, 2).toString();
+    int harga_beli = Integer.parseInt(tabelProduk.getValueAt(n, 3).toString());
+    int harga_jual = Integer.parseInt(tabelProduk.getValueAt(n, 4).toString());
+    int stok = Integer.parseInt(tabelProduk.getValueAt(n, 5).toString());
+    String deskripsi = tabelProduk.getValueAt(n, 6).toString();
+    
+    ubahproduk U = new ubahproduk(this, true);
+    U.setNama_produk(nama_produk);
+    U.setHarga_beli(harga_beli);
+    U.setHarga_jual(harga_jual); 
+    U.setStok(stok); 
+    U.setDeskripsi(deskripsi);
+    U.setVisible(true);
+} else {
+    JOptionPane.showMessageDialog(this, "Anda belum memilih data");
+}
+
+         // TODO add your handling code here:
     }//GEN-LAST:event_tblubahprodukActionPerformed
 
     private void tblhapusprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tblhapusprodukActionPerformed
-        // TODO add your handling code here:
+ int n = tabelProduk.getSelectedRow();
+        if(n != -1){
+            int id = Integer.parseInt(tabelProduk.getValueAt(n, 1).toString());
+            System.out.println(id);
+            String fullname = tabelProduk.getValueAt(n, 2).toString();
+
+            int opsi = JOptionPane.showConfirmDialog(this, 
+                    "Apakah Anda yakin ingin menghapus data "+fullname+"?", 
+                    "Hapus Data", 
+                    JOptionPane.YES_NO_OPTION);
+            if(opsi == 0){
+                String Q = "DELETE FROM produk "
+                        + "WHERE id_produk="+id;
+                System.out.println(Q);
+                try {
+                    java.sql.Connection K = connect.konek();
+                    Statement S = K.createStatement();
+                    S.executeUpdate(Q);
+                    viewData(""); 
+                    JOptionPane.showMessageDialog(this, "Data "+fullname+" telah terhapus");
+                } catch (SQLException e) {
+                }
+            }
+            
+        }else {
+            JOptionPane.showMessageDialog(this, "Anda belum memilih data");
+        }     // TODO add your handling code here:
     }//GEN-LAST:event_tblhapusprodukActionPerformed
 
     private void tblrefreshprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tblrefreshprodukActionPerformed
         // TODO add your handling code here:
+        viewDataProduk("");
     }//GEN-LAST:event_tblrefreshprodukActionPerformed
-
-    private void pencarianprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pencarianprodukActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pencarianprodukActionPerformed
 
     private void pencarianKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pencarianKeyReleased
 String key = pencarian.getText();
@@ -552,9 +597,24 @@ String key = pencarian.getText();
                 + "fullname LIKE '%" + key + "%' OR "
                 + "username LIKE '%" + key + "%' OR "
                 + "password LIKE '%" + key + "%' OR "
-                + "level LIKE '%" + key + "%'";
+                + "role LIKE '%" + key + "%'";
         viewData(where);        // TODO add your handling code here:
     }//GEN-LAST:event_pencarianKeyReleased
+
+    private void pencarianprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pencarianprodukActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pencarianprodukActionPerformed
+
+    private void pencarianprodukKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pencarianprodukKeyReleased
+String key = pencarianproduk.getText(); 
+        String where = "WHERE "
+                + "nama_produk LIKE '%" + key + "%' OR "
+                + "harga_beli LIKE '%" + key + "%' OR "
+                + "harga_jual LIKE '%" + key + "%' OR "
+                + "stok LIKE '%" + key + "%' OR "
+                + "deskripsi LIKE '%" + key + "%'";
+        viewDataProduk(where);   
+    }//GEN-LAST:event_pencarianprodukKeyReleased
 
     /**
      * @param args the command line arguments
@@ -599,9 +659,9 @@ String key = pencarian.getText();
     private javax.swing.JToggleButton hapususer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -619,8 +679,8 @@ String key = pencarian.getText();
     private javax.swing.JTextField pencarian;
     private javax.swing.JTextField pencarianproduk;
     private javax.swing.JToggleButton refresh;
+    private javax.swing.JTable tabelProduk;
     private javax.swing.JTable tabelUser;
-    private javax.swing.JTable tabelUser1;
     private javax.swing.JToggleButton tambahuser;
     private javax.swing.JToggleButton tblhapusproduk;
     private javax.swing.JToggleButton tblrefreshproduk;
@@ -628,17 +688,16 @@ String key = pencarian.getText();
     private javax.swing.JToggleButton tblubahproduk;
     private javax.swing.JToggleButton ubahuser;
     // End of variables declaration//GEN-END:variables
-     public static void viewData(String where) {
+    public static void viewData(String where) {
         try {
-            //kode kita
-            for (int i = m.getRowCount()-1; i >=0; i--) {
-                m.removeRow(i);
+           
+            for (int i = pr.getRowCount()-1; i >=0; i--) {
+                pr.removeRow(i);
             }
 
-            java.sql.Connection K = connect.konek(); 
+            java.sql.Connection K = connect.konek();
             Statement S = K.createStatement();
-            String Q = "SELECT * FROM akun ";
-//            System.out.println(Q);
+            String Q = "SELECT * FROM akun " + where;
             ResultSet R = S.executeQuery(Q);
             int no = 1;
             while (R.next()) {
@@ -649,27 +708,167 @@ String key = pencarian.getText();
                 String role = R.getString("role");
 
                 Object[] D = {no, id_akun, fullname, username, password, role};
-                m.addRow(D);
+                pr.addRow(D);
 
                 no++;
             }
         } catch (SQLException e) {
-            //error handling
+            e.printStackTrace();
         }
     }
      
      
+    public static void viewDataProduk(String where) {
+        try {
+            for (int i = dd.getRowCount()-1; i >=0; i--) {
+                dd.removeRow(i);
+            }
+            
+            java.sql.Connection K = connect.konek();
+            Statement S = K.createStatement();
+            String Q = "SELECT * FROM produk WHERE "
+                + "id_produk LIKE '%" + where + "%' OR "
+                + "nama_produk LIKE '%" + where + "%' OR "
+                + "harga_beli  LIKE '%" + where + "%' OR "
+                + "harga_jual LIKE '%" + where + "%' OR "
+                + "stok LIKE '%" + where + "%' OR "
+                + "deskripsi LIKE '%" + where + "%'";
+            ResultSet R = S.executeQuery(Q);
+
+
+            int no = 1;
+            while (R.next()) {
+                int id_produk = R.getInt("id_produk");
+                String nama_produk = R.getString("nama_produk");
+                int harga_beli = R.getInt("harga_beli");
+                int harga_jual = R.getInt("harga_jual");
+                int stok = R.getInt("stok");
+                String deskripsi= R.getString("deskripsi");
+
+                Object[] G = {
+                    no,id_produk,nama_produk,harga_beli, 
+                    harga_jual,stok,deskripsi};
+                dd.addRow(G);
+
+                no++;  
+            }
+        } catch (SQLException e) {
+            
+        }
+    }
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+        
+//    public static void viewDataProduk(String where) {
+//        try {
+//            //kode kita
+//            for (int i = mod_p.getRowCount()-1; i >=0; i--) {
+//                mod_p.removeRow(i);
+//            }
+            
+//             for (int i = 0; i < mod_p.getRowCount(); i++) {
+//                mod_p.removeRow(i);
+//            }
+
+//            java.sql.Connection K = connect.konek();
+//            Statement S = K.createStatement();
+//            String Q = "SELECT * FROM produk WHERE "
+//                + "id_produk LIKE '%" + where + "%' OR "
+//                + "nama_produk LIKE '%" + where + "%' OR "
+//                + "harga_beli  LIKE '%" + where + "%' OR "
+//                + "harga_jual LIKE '%" + where + "%' OR "
+//                + "stok LIKE '%" + where + "%' OR "
+//                + "deskripsi LIKE '%" + where + "%'";
+//            ResultSet R = S.executeQuery(Q);
+//            int no = 1;
+//            while (R.next()) {
+//                int id_produk = R.getInt("id_produk");
+//                String nama_produk = R.getString("nama produk");
+//                int harga_beli = R.getInt("harga beli");
+//                int harga_jual = R.getInt("harga jual");
+//                int stok = R.getInt("stok");
+//                String deskripsi= R.getString("deskripsi");
+//              
+//
+//                Object[] G = {
+//                    no,id_produk,nama_produk,harga_beli, 
+//                    harga_jual,stok,deskripsi};
+//                mod_p.addRow(G);
+//
+//                no++;
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            //ereror handling
+//        }
+//    }
+     
+     
       private void settingTable() {
-        m = (DefaultTableModel) tabelUser.getModel();        
+        pr = (DefaultTableModel) tabelUser.getModel();        
         tabelUser.getColumnModel().getColumn(0).setMinWidth(50);
         tabelUser.getColumnModel().getColumn(0).setMaxWidth(70);
 
-//        tabelUser.getColumnModel().getColumn(1).setMinWidth(0);
-//        tabelUser.getColumnModel().getColumn(1).setMaxWidth(0);
+        tabelUser.getColumnModel().getColumn(1).setMinWidth(0);
+        tabelUser.getColumnModel().getColumn(1).setMaxWidth(0);
 
         tabelUser.getColumnModel().getColumn(2).setMinWidth(350);
         tabelUser.getColumnModel().getColumn(2).setMaxWidth(500);
+        
+        
+        dd= (DefaultTableModel) tabelProduk.getModel();        
+        tabelProduk.getColumnModel().getColumn(0).setMinWidth(50);
+        tabelProduk.getColumnModel().getColumn(0).setMaxWidth(70);
+
+        tabelUser.getColumnModel().getColumn(1).setMinWidth(0);
+        tabelUser.getColumnModel().getColumn(1).setMaxWidth(0);
+
+        tabelProduk.getColumnModel().getColumn(2).setMinWidth(350);
+        tabelProduk.getColumnModel().getColumn(2).setMaxWidth(500);
       }
+      
+//       private void settingTableP() {
+//
+//      }
 }
 
 

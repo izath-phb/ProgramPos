@@ -235,7 +235,7 @@ public class Login extends javax.swing.JFrame {
     
             String user = txt_name.getText();
             String pass = new String(txt_password.getPassword());
-            String roles = (String) txt_role.getSelectedItem();
+            String roles = txt_role.getSelectedItem().toString();
         
 
         try {
@@ -265,12 +265,12 @@ public class Login extends javax.swing.JFrame {
                     this.setVisible(false);
                     O.setVisible(true);
 //                } else if (P.getrole().equals("owner")) {
-//                    Profile_owner O = new Profile_owner(P);
+//                    Profile_owner O = new Profile_owner();
 //                    O.setExtendedState(Frame.MAXIMIZED_BOTH);
 //                    this.setVisible(false);
 //                    O.setVisible(true);
-//                } else if (P.getLevel().equals("owner")) {
-//                    OwnerPage O = new OwnerPage(P);
+//                } else if (P.getrole().equals("kasir")) {
+//                    Profile_kasir O = new Profile_kasir();
 //                    O.setExtendedState(Frame.MAXIMIZED_BOTH);
 //                    this.setVisible(false);
 //                    O.setVisible(true);

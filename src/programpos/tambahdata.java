@@ -159,8 +159,7 @@ public class tambahdata extends javax.swing.JDialog {
     }//GEN-LAST:event_txtFullnameActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        // TODO add your handling code here:
-          String fullName = txtFullname.getText();
+        String fullName = txtFullname.getText();
         String username = txtUsername.getText();
         String password = new String(txtPassword.getPassword());
         String role = txtRole.getSelectedItem().toString();

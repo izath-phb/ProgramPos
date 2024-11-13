@@ -4,6 +4,12 @@
  */
 package programpos;
 
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Lenovo
@@ -17,7 +23,60 @@ public class ubahproduk extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
+private int id_produk;
+    private String nama_produk;
+    private int harga_beli;
+    private int harga_jual;
+    private int stok;
+    private String deskripsi;
 
+    public int getId_Produk() {
+        return id_produk;
+    }
+
+    public void setId(int id) {
+        this.id_produk = id;
+    }
+
+    public String getNama_produk() {
+        return nama_produk;
+    }
+
+    public void setNama_produk(String nama_produk) {
+        this.nama_produk = nama_produk;
+    }
+
+    public int getHarga_Beli() {
+        return harga_beli;
+    }
+
+    public void setHarga_beli(int harga_beli) {
+        this.harga_beli = harga_beli;
+    }
+
+    public int getHarga_jual() {
+        return harga_jual;
+    }
+
+    public void setHarga_jual(int harga_jual) {
+        this.harga_jual = harga_jual;
+    }
+
+    public int getstok() {
+        return stok;
+    }
+
+    public void setStok(int stok) {
+        this.stok = stok;
+    }
+    
+    public String getDeskripsi() {
+        return deskripsi;
+    }
+
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi = deskripsi;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,21 +86,166 @@ public class ubahproduk extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtnamaproduk = new javax.swing.JTextField();
+        txthargabeli = new javax.swing.JTextField();
+        txthargajual = new javax.swing.JTextField();
+        txtstok = new javax.swing.JTextField();
+        txtdeskripsi = new javax.swing.JTextField();
+        batalproduk = new javax.swing.JButton();
+        simpanproduk = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jLabel1.setText("nama produk");
+
+        jLabel2.setText("harga beli");
+
+        jLabel3.setText("harga jual");
+
+        jLabel4.setText("stok");
+
+        jLabel5.setText("deskripsi");
+
+        txtnamaproduk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnamaprodukActionPerformed(evt);
+            }
+        });
+
+        txthargabeli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txthargabeliActionPerformed(evt);
+            }
+        });
+
+        batalproduk.setText("Batal");
+        batalproduk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                batalprodukActionPerformed(evt);
+            }
+        });
+
+        simpanproduk.setText("Simpan");
+        simpanproduk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simpanprodukActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(56, 56, 56)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtnamaproduk, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                    .addComponent(txthargabeli)
+                    .addComponent(txthargajual)
+                    .addComponent(txtstok)
+                    .addComponent(txtdeskripsi))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(simpanproduk)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(batalproduk)
+                .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtnamaproduk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txthargabeli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txthargajual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtstok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtdeskripsi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(batalproduk)
+                    .addComponent(simpanproduk))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void batalprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalprodukActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_batalprodukActionPerformed
+
+    private void simpanprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanprodukActionPerformed
+       String nama_produk = txtnamaproduk.getText();
+       int harga_beli = Integer.parseInt(txthargabeli.getText());
+       int harga_jual = Integer.parseInt(txthargajual.getText());
+       int stok = Integer.parseInt(txtstok.getText());
+       String deskripsi = txtdeskripsi.getText();
+
+       String Q = "UPDATE produk "
+        + "SET nama_produk=?, "
+        + "harga_beli=?, "
+        + "harga_jual=?, "
+        + "stok=?, "
+        + "deskripsi=? "
+        + "WHERE id=?";
+
+    try {
+    Connection K = connect.konek();
+    PreparedStatement P = K.prepareStatement(Q);
+    P.setString(1, nama_produk);
+    P.setInt(2, harga_beli);
+    P.setInt(3, harga_jual);
+    P.setInt(4, stok);
+    P.setString(5, deskripsi);
+      // Assuming 'id' is a variable containing the ID of the product
+
+    P.executeUpdate();
+
+    Profile_admin.viewDataProduk(""); 
+    JOptionPane.showMessageDialog(this, "Data berhasil disimpan");
+    txtnamaproduk.requestFocus();
+} catch (HeadlessException | SQLException e) {
+    e.printStackTrace(); // Print the error to help with debugging
+}
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_simpanprodukActionPerformed
+
+    private void txthargabeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txthargabeliActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txthargabeliActionPerformed
+
+    private void txtnamaprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnamaprodukActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnamaprodukActionPerformed
 
     /**
      * @param args the command line arguments
@@ -93,5 +297,17 @@ public class ubahproduk extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton batalproduk;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton simpanproduk;
+    private javax.swing.JTextField txtdeskripsi;
+    private javax.swing.JTextField txthargabeli;
+    private javax.swing.JTextField txthargajual;
+    private javax.swing.JTextField txtnamaproduk;
+    private javax.swing.JTextField txtstok;
     // End of variables declaration//GEN-END:variables
 }

@@ -51,8 +51,8 @@ class Profile {
         return role;
     }
 
-    public void setrole(String level) {
-        this.role = level;
+    public void setrole(String role) {
+        this.role = role;
     }
     
     
