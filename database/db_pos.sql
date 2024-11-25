@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2024 at 07:48 AM
+-- Generation Time: Nov 25, 2024 at 10:44 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,18 +29,21 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `akun` (
   `id_akun` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `role` enum('admin','user') NOT NULL
+  `fullname` varchar(50) DEFAULT NULL,
+  `username` varchar(50) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  `role` enum('admin','kasir','owner') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `akun`
 --
 
-INSERT INTO `akun` (`id_akun`, `username`, `password`, `role`) VALUES
-(1, 'izath', 'izath', 'admin'),
-(2, 'salim', 'salim', 'user');
+INSERT INTO `akun` (`id_akun`, `fullname`, `username`, `password`, `role`) VALUES
+(1, 'Izath izath', 'izath', 'izath', 'admin'),
+(2, 'Riyan Nur Hidayat', 'riyan', 'riyan', 'kasir'),
+(3, 'Rafli Miftahul Bahtiar', 'rafli', 'rafli', 'admin'),
+(31, 'Arif Tri', 'Arif', 'Arif', 'admin');
 
 -- --------------------------------------------------------
 
@@ -55,13 +58,6 @@ CREATE TABLE `cart` (
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id_cart`, `id_user`, `id_produk`, `created_at`) VALUES
-(1, 2, 1, '2024-09-30 10:41:14');
-
 -- --------------------------------------------------------
 
 --
@@ -71,7 +67,8 @@ INSERT INTO `cart` (`id_cart`, `id_user`, `id_produk`, `created_at`) VALUES
 CREATE TABLE `produk` (
   `id_produk` int(11) NOT NULL,
   `nama_produk` varchar(50) NOT NULL,
-  `harga` int(11) NOT NULL,
+  `harga_beli` int(11) NOT NULL,
+  `harga_jual` int(11) NOT NULL,
   `stok` int(11) NOT NULL,
   `deskripsi` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -80,9 +77,9 @@ CREATE TABLE `produk` (
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`id_produk`, `nama_produk`, `harga`, `stok`, `deskripsi`) VALUES
-(1, 'Gula', 15000, 20, 'ini gula premium'),
-(2, 'Minyak', 14000, 20, 'minyak 1 liter');
+INSERT INTO `produk` (`id_produk`, `nama_produk`, `harga_beli`, `harga_jual`, `stok`, `deskripsi`) VALUES
+(4, 'minyak', 10000, 10000, 10, 'minyak murah'),
+(6, 'gulaku', 15000, 20000, 10, 'axjga');
 
 -- --------------------------------------------------------
 
@@ -103,8 +100,9 @@ CREATE TABLE `profil` (
 --
 
 INSERT INTO `profil` (`id_profil`, `id_user`, `nama_lengkap`, `alamat`, `no_telp`) VALUES
-(1, 1, 'izath', 'balapulang', '087767855432'),
-(2, 2, 'Salim Sulaiman', 'Balapulang', '087767856476');
+(1, 1, 'Izath Izath', 'balapulang', '087767855432'),
+(3, 2, 'Riyan Nur Hidayat', 'Tegal', '087678654567'),
+(4, 4, 'Rafli Miftahul B', 'Tegal', '087689764532');
 
 -- --------------------------------------------------------
 
@@ -119,13 +117,6 @@ CREATE TABLE `transaksi` (
   `tanggal_transaksi` datetime NOT NULL,
   `status_pembayaran` enum('pending','completed','canceled') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `transaksi`
---
-
-INSERT INTO `transaksi` (`id_transaksi`, `id_user`, `total_harga`, `tanggal_transaksi`, `status_pembayaran`) VALUES
-(1, 2, 30000, '2024-09-30 10:43:17', 'completed');
 
 -- --------------------------------------------------------
 
@@ -142,13 +133,6 @@ CREATE TABLE `transaksi_detail` (
   `sub_total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `transaksi_detail`
---
-
-INSERT INTO `transaksi_detail` (`id_transaksi_detail`, `id_transaksi`, `id_produk`, `jumlah`, `harga_produk`, `sub_total`) VALUES
-(1, 1, 1, 2, 15000, 30000);
-
 -- --------------------------------------------------------
 
 --
@@ -159,7 +143,7 @@ CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
   `id_akun` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `status` enum('active','nonactive') NOT NULL
+  `status` enum('aktif','nonaktif') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -167,8 +151,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `id_akun`, `email`, `status`) VALUES
-(1, 1, 'izath@gmail.com', 'active'),
-(2, 2, 'salim@gmail.com', 'active');
+(1, 1, 'izath@gmail.com', 'aktif'),
+(2, 2, 'riyan123@gmail.com', 'aktif'),
+(4, 3, 'rafli123@gmail.com', 'aktif');
 
 --
 -- Indexes for dumped tables
@@ -220,7 +205,8 @@ ALTER TABLE `transaksi_detail`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id_user`);
+  ADD PRIMARY KEY (`id_user`),
+  ADD KEY `fk_userAkun` (`id_akun`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -230,7 +216,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `akun`
 --
 ALTER TABLE `akun`
-  MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -242,13 +228,13 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `profil`
 --
 ALTER TABLE `profil`
-  MODIFY `id_profil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_profil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
@@ -266,7 +252,7 @@ ALTER TABLE `transaksi_detail`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -302,7 +288,7 @@ ALTER TABLE `transaksi_detail`
 -- Constraints for table `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `fk_userAkun` FOREIGN KEY (`id_user`) REFERENCES `akun` (`id_akun`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_userAkun` FOREIGN KEY (`id_akun`) REFERENCES `akun` (`id_akun`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
