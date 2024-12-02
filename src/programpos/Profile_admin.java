@@ -366,7 +366,7 @@ public class Profile_admin extends javax.swing.JFrame {
 
             },
             new String [] {
-                "no", "id_produk", "nama produk", "harga beli", "harga jual", "stok", "deskripsi"
+                "no", "id produk", "nama produk", "kode produk", "harga beli", "harga jual", "stok", "deskripsi"
             }
         ));
         jScrollPane2.setViewportView(tabelProduk);
@@ -533,25 +533,29 @@ public class Profile_admin extends javax.swing.JFrame {
 
     private void tblubahprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tblubahprodukActionPerformed
                                               
-   int n = tabelProduk.getSelectedRow();
-if (n != -1) {
-  
-    String nama_produk = tabelProduk.getValueAt(n, 2).toString();
-    int harga_beli = Integer.parseInt(tabelProduk.getValueAt(n, 3).toString());
-    int harga_jual = Integer.parseInt(tabelProduk.getValueAt(n, 4).toString());
-    int stok = Integer.parseInt(tabelProduk.getValueAt(n, 5).toString());
-    String deskripsi = tabelProduk.getValueAt(n, 6).toString();
+    int n = tabelProduk.getSelectedRow();
+        if(n != -1){
+            int id = Integer.parseInt(tabelProduk.getValueAt(n, 1).toString());
+            String nama_product = tabelProduk.getValueAt(n, 2).toString();
+            String kode_produk = tabelProduk.getValueAt(n, 3).toString();
+            int harga_beli = Integer.parseInt(tabelProduk.getValueAt(n, 4).toString());
+            int harga_jual = Integer.parseInt(tabelProduk.getValueAt(n, 5).toString());
+            int stok = Integer.parseInt(tabelProduk.getValueAt(n, 6).toString());
+            String deskripsi = tabelProduk.getValueAt(n, 7).toString();
+            ubahproduk U = new ubahproduk(this, true);
+            U.setId(id); 
+            U.setNama_produk(nama_product);
+            U.setKode_produk(kode_produk);
+            U.setHarga_beli(harga_beli);
+            U.setHarga_jual(harga_jual); 
+            U.setStok(stok);
+            U.setDeskripsi(deskripsi);
+            U.setVisible(true); 
+            
+        }else {
+            JOptionPane.showMessageDialog(this, "Anda belum memilih produk");
+        }
     
-    ubahproduk U = new ubahproduk(this, true);
-    U.setNama_produk(nama_produk);
-    U.setHarga_beli(harga_beli);
-    U.setHarga_jual(harga_jual); 
-    U.setStok(stok); 
-    U.setDeskripsi(deskripsi);
-    U.setVisible(true);
-} else {
-    JOptionPane.showMessageDialog(this, "Anda belum memilih data");
-}
 
          // TODO add your handling code here:
     }//GEN-LAST:event_tblubahprodukActionPerformed
@@ -603,17 +607,24 @@ String key = pencarian.getText();
 
     private void pencarianprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pencarianprodukActionPerformed
         // TODO add your handling code here:
+       String key = pencarianproduk.getText().trim();
+        if (!key.isEmpty()) {
+            viewDataProduk(key);
+        }else{
+            viewDataProduk("");
+        }        // TODO add yo
     }//GEN-LAST:event_pencarianprodukActionPerformed
 
     private void pencarianprodukKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pencarianprodukKeyReleased
-String key = pencarianproduk.getText(); 
+String key = pencarianproduk.getText();
         String where = "WHERE "
                 + "nama_produk LIKE '%" + key + "%' OR "
+                + "kode_produk LIKE '%" + key + "%' OR "
                 + "harga_beli LIKE '%" + key + "%' OR "
                 + "harga_jual LIKE '%" + key + "%' OR "
                 + "stok LIKE '%" + key + "%' OR "
                 + "deskripsi LIKE '%" + key + "%'";
-        viewDataProduk(where);   
+        viewDataProduk(where);        // TODO add your handling code here:
     }//GEN-LAST:event_pencarianprodukKeyReleased
 
     /**
@@ -726,13 +737,7 @@ String key = pencarianproduk.getText();
             
             java.sql.Connection K = connect.konek();
             Statement S = K.createStatement();
-            String Q = "SELECT * FROM produk WHERE "
-                + "id_produk LIKE '%" + where + "%' OR "
-                + "nama_produk LIKE '%" + where + "%' OR "
-                + "harga_beli  LIKE '%" + where + "%' OR "
-                + "harga_jual LIKE '%" + where + "%' OR "
-                + "stok LIKE '%" + where + "%' OR "
-                + "deskripsi LIKE '%" + where + "%'";
+            String Q = "SELECT * FROM produk " + where;
             ResultSet R = S.executeQuery(Q);
 
 
@@ -740,13 +745,14 @@ String key = pencarianproduk.getText();
             while (R.next()) {
                 int id_produk = R.getInt("id_produk");
                 String nama_produk = R.getString("nama_produk");
+                String kode_produk = R.getString("kode_produk");
                 int harga_beli = R.getInt("harga_beli");
                 int harga_jual = R.getInt("harga_jual");
                 int stok = R.getInt("stok");
                 String deskripsi= R.getString("deskripsi");
 
                 Object[] G = {
-                    no,id_produk,nama_produk,harga_beli, 
+                    no,id_produk,nama_produk,kode_produk,harga_beli, 
                     harga_jual,stok,deskripsi};
                 dd.addRow(G);
 

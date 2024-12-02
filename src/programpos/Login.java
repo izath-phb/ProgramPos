@@ -269,11 +269,10 @@ public class Login extends javax.swing.JFrame {
 //                    O.setExtendedState(Frame.MAXIMIZED_BOTH);
 //                    this.setVisible(false);
 //                    O.setVisible(true);
-//                } else if (P.getrole().equals("kasir")) {
-//                    Profile_kasir O = new Profile_kasir();
-//                    O.setExtendedState(Frame.MAXIMIZED_BOTH);
-//                    this.setVisible(false);
-//                    O.setVisible(true);
+                } else if (P.getrole().equals("kasir")) {
+                    Profile_kasir O = new Profile_kasir(P);
+                    this.setVisible(false);
+                    O.setVisible(true);
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid username/password");

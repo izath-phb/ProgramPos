@@ -45,6 +45,8 @@ public class tambahproduk extends javax.swing.JDialog {
         txtharga_jual = new javax.swing.JTextField();
         txtstok = new javax.swing.JTextField();
         txtdeskripsi = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtkode_produk = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -75,6 +77,8 @@ public class tambahproduk extends javax.swing.JDialog {
             }
         });
 
+        jLabel8.setText("kode produk");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -82,16 +86,23 @@ public class tambahproduk extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel8))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtkode_produk)
+                            .addComponent(txtnama_produk)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
                             .addComponent(jLabel5)
                             .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(31, 31, 31)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtnama_produk)
                             .addComponent(txtharga_beli)
                             .addComponent(txtharga_jual)
                             .addComponent(txtstok)
@@ -106,11 +117,15 @@ public class tambahproduk extends javax.swing.JDialog {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtnama_produk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(3, 3, 3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtkode_produk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtharga_beli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -153,6 +168,7 @@ public class tambahproduk extends javax.swing.JDialog {
 
     private void tambah_produkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambah_produkActionPerformed
         String nama_produk = txtnama_produk.getText();
+        String kode_produk = txtkode_produk.getText();
         int harga_beli = Integer.parseInt(txtharga_beli.getText());
         int harga_jual = Integer.parseInt(txtharga_jual.getText());
         int stok = Integer.parseInt(txtstok.getText());
@@ -160,17 +176,18 @@ public class tambahproduk extends javax.swing.JDialog {
 
         
         String Q = "INSERT INTO produk "
-                + "(nama_produk,harga_beli,harga_jual,stok,deskripsi) "
+                + "(nama_produk,kode_produk,harga_beli,harga_jual,stok,deskripsi) "
                 + "VALUES "
-                + "(?,?,?,?,?)";
+                + "(?,?,?,?,?,?)";
         try {
             Connection K = connect.konek();
             PreparedStatement P = K.prepareStatement(Q);
             P.setString(1, nama_produk);
-            P.setInt(2, Integer.parseInt(txtharga_beli.getText()));
-            P.setInt(3, Integer.parseInt(txtharga_jual.getText()));
-            P.setInt(4, Integer.parseInt(txtstok.getText()));
-            P.setString(5, deskripsi);
+            P.setString(2, kode_produk);
+            P.setInt(3, Integer.parseInt(txtharga_beli.getText()));
+            P.setInt(4, Integer.parseInt(txtharga_jual.getText()));
+            P.setInt(5, Integer.parseInt(txtstok.getText()));
+            P.setString(6, deskripsi);
             P.executeUpdate();
             
             Profile_admin.viewDataProduk(""); 
@@ -234,11 +251,13 @@ public class tambahproduk extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton tambah_produk;
     private javax.swing.JTextField txtdeskripsi;
     private javax.swing.JTextField txtharga_beli;
     private javax.swing.JTextField txtharga_jual;
+    private javax.swing.JTextField txtkode_produk;
     private javax.swing.JTextField txtnama_produk;
     private javax.swing.JTextField txtstok;
     // End of variables declaration//GEN-END:variables

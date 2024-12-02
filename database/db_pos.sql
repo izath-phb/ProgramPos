@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2024 at 10:44 AM
+-- Generation Time: Dec 02, 2024 at 07:31 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,7 +43,7 @@ INSERT INTO `akun` (`id_akun`, `fullname`, `username`, `password`, `role`) VALUE
 (1, 'Izath izath', 'izath', 'izath', 'admin'),
 (2, 'Riyan Nur Hidayat', 'riyan', 'riyan', 'kasir'),
 (3, 'Rafli Miftahul Bahtiar', 'rafli', 'rafli', 'admin'),
-(31, 'Arif Tri', 'Arif', 'Arif', 'admin');
+(49, 'Arif Tri Prawito', 'Arif', 'Arif', 'admin');
 
 -- --------------------------------------------------------
 
@@ -67,6 +67,7 @@ CREATE TABLE `cart` (
 CREATE TABLE `produk` (
   `id_produk` int(11) NOT NULL,
   `nama_produk` varchar(50) NOT NULL,
+  `kode_produk` varchar(10) NOT NULL,
   `harga_beli` int(11) NOT NULL,
   `harga_jual` int(11) NOT NULL,
   `stok` int(11) NOT NULL,
@@ -77,9 +78,9 @@ CREATE TABLE `produk` (
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`id_produk`, `nama_produk`, `harga_beli`, `harga_jual`, `stok`, `deskripsi`) VALUES
-(4, 'minyak', 10000, 10000, 10, 'minyak murah'),
-(6, 'gulaku', 15000, 20000, 10, 'axjga');
+INSERT INTO `produk` (`id_produk`, `nama_produk`, `kode_produk`, `harga_beli`, `harga_jual`, `stok`, `deskripsi`) VALUES
+(4, 'minyak', 'P111', 10000, 12000, 10, 'minyak jernih'),
+(8, 'gula', 'P112', 15000, 20000, 5, 'ini gula premium');
 
 -- --------------------------------------------------------
 
@@ -216,7 +217,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `akun`
 --
 ALTER TABLE `akun`
-  MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -228,7 +229,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `profil`
