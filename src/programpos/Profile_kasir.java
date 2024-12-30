@@ -75,7 +75,7 @@ public class Profile_kasir extends javax.swing.JFrame {
 
         namaKasir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         namaKasir.setForeground(new java.awt.Color(255, 255, 255));
-        namaKasir.setText("Selamat Datang Kasir");
+        namaKasir.setText("Selamat Datang ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -84,7 +84,7 @@ public class Profile_kasir extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(namaKasir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btn_logout)
                 .addGap(12, 12, 12))
         );
@@ -113,10 +113,7 @@ public class Profile_kasir extends javax.swing.JFrame {
 
         tabelkasir.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "Nama Produk", "Quantity", "Harga"
@@ -177,6 +174,11 @@ public class Profile_kasir extends javax.swing.JFrame {
         txtuangbayar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtuangbayarActionPerformed(evt);
+            }
+        });
+        txtuangbayar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtuangbayarKeyReleased(evt);
             }
         });
 
@@ -358,6 +360,11 @@ public class Profile_kasir extends javax.swing.JFrame {
     private void txtuangbayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtuangbayarActionPerformed
         endsKetikUangPembayaran();        // TODO add your handling code here:
     }//GEN-LAST:event_txtuangbayarActionPerformed
+
+    private void txtuangbayarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtuangbayarKeyReleased
+        endsKetikUangPembayaran();// TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtuangbayarKeyReleased
 
     /**
      * @param args the command line arguments

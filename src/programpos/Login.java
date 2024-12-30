@@ -233,56 +233,7 @@ public class Login extends javax.swing.JFrame {
 //            System.err.println("Error" + e.getMessage());
 //        }
     
-            String user = txt_name.getText();
-            String pass = new String(txt_password.getPassword());
-            String roles = txt_role.getSelectedItem().toString();
-        
-
-        try {
-
-        Connection K = connect.konek();
-            String Q = "SELECT * FROM `akun` WHERE username=? AND password=? AND role=?;";
-            PreparedStatement S = K.prepareStatement(Q);
-            S.setString(1, user);
-            S.setString(2, pass);
-            S.setObject(3, roles);
-            ResultSet R = S.executeQuery();
-            int count = 0;
-            Profile P = new Profile();
-            while (R.next()) {
-                P.setId(R.getInt("id_akun"));
-                P.setFullname(R.getString("fullname"));
-                P.setUsername(R.getString("username"));
-                P.setPassword(R.getString("password"));
-                P.setrole(R.getString("role"));
-                count++;
-            }
-
-            if (count > 0) {
-                //JOptionPane.showMessageDialog(this, "Sukses Login");
-                if (P.getrole().equals("admin")) {
-                    Profile_admin O = new Profile_admin(P);
-                    this.setVisible(false);
-                    O.setVisible(true);
-//                } else if (P.getrole().equals("owner")) {
-//                    Profile_owner O = new Profile_owner();
-//                    O.setExtendedState(Frame.MAXIMIZED_BOTH);
-//                    this.setVisible(false);
-//                    O.setVisible(true);
-                } else if (P.getrole().equals("kasir")) {
-                    Profile_kasir O = new Profile_kasir(P);
-                    this.setVisible(false);
-                    O.setVisible(true);
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Invalid username/password");
-                txt_name.requestFocus();
-            }
-
-        } catch (HeadlessException | SQLException e) {
-            System.err.println(e.getMessage());
-        }
-
+        loginNow();
     
     }//GEN-LAST:event_btn_loginActionPerformed
 
@@ -347,6 +298,57 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField txt_password;
     private javax.swing.JComboBox<String> txt_role;
     // End of variables declaration//GEN-END:variables
+
+    private void loginNow() {
+        String user = txt_name.getText();
+        String pass = new String(txt_password.getPassword());
+        String roles = txt_role.getSelectedItem().toString();
+
+        try {
+
+            Connection K = connect.konek();
+            String Q = "SELECT * FROM `akun` WHERE username=? AND password=? AND role=?;";
+            PreparedStatement S = K.prepareStatement(Q);
+            S.setString(1, user);
+            S.setString(2, pass);
+            S.setObject(3, roles);
+            ResultSet R = S.executeQuery();
+            int count = 0;
+            Profile P = new Profile();
+            while (R.next()) {
+                P.setId(R.getInt("id_akun"));
+                P.setFullname(R.getString("fullname"));
+                P.setUsername(R.getString("username"));
+                P.setPassword(R.getString("password"));
+                P.setrole(R.getString("role"));
+                count++;
+            }
+
+            if (count > 0) {
+                //JOptionPane.showMessageDialog(this, "Sukses Login");
+                if (P.getrole().equals("admin")) {
+                    Profile_admin O = new Profile_admin(P);
+                    this.setVisible(false);
+                    O.setVisible(true);
+                } else if (P.getrole().equals("owner")) {
+                    Profile_owner O = new Profile_owner();
+                    this.setVisible(false);
+                    O.setVisible(true);
+                } else if (P.getrole().equals("kasir")) {
+                    Profile_kasir O = new Profile_kasir(P);
+                    this.setVisible(false);
+                    O.setVisible(true);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid username/password");
+                txt_name.requestFocus();
+            }
+
+        } catch (HeadlessException | SQLException e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
 
     
 

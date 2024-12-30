@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2024 at 07:31 AM
+-- Generation Time: Dec 30, 2024 at 11:07 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,7 +43,7 @@ INSERT INTO `akun` (`id_akun`, `fullname`, `username`, `password`, `role`) VALUE
 (1, 'Izath izath', 'izath', 'izath', 'admin'),
 (2, 'Riyan Nur Hidayat', 'riyan', 'riyan', 'kasir'),
 (3, 'Rafli Miftahul Bahtiar', 'rafli', 'rafli', 'admin'),
-(49, 'Arif Tri Prawito', 'Arif', 'Arif', 'admin');
+(49, 'Arif Tri Prawito', 'Arif', 'Arif', 'owner');
 
 -- --------------------------------------------------------
 
@@ -68,8 +68,8 @@ CREATE TABLE `produk` (
   `id_produk` int(11) NOT NULL,
   `nama_produk` varchar(50) NOT NULL,
   `kode_produk` varchar(10) NOT NULL,
-  `harga_beli` int(11) NOT NULL,
-  `harga_jual` int(11) NOT NULL,
+  `harga_beli` double NOT NULL,
+  `harga_jual` double NOT NULL,
   `stok` int(11) NOT NULL,
   `deskripsi` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -79,8 +79,7 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id_produk`, `nama_produk`, `kode_produk`, `harga_beli`, `harga_jual`, `stok`, `deskripsi`) VALUES
-(4, 'minyak', 'P111', 10000, 12000, 10, 'minyak jernih'),
-(8, 'gula', 'P112', 15000, 20000, 5, 'ini gula premium');
+(10, 'beras', 'p001', 15500, 18000, 25, 'beras bulog');
 
 -- --------------------------------------------------------
 
@@ -229,7 +228,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `profil`
