@@ -43,6 +43,7 @@ public class Profile_kasir extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btn_logout = new javax.swing.JButton();
         namaKasir = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         jPanel4 = new javax.swing.JPanel();
         JScrollPane1 = new javax.swing.JScrollPane();
         tabelkasir = new javax.swing.JTable();
@@ -77,12 +78,18 @@ public class Profile_kasir extends javax.swing.JFrame {
         namaKasir.setForeground(new java.awt.Color(255, 255, 255));
         namaKasir.setText("Selamat Datang ");
 
+        jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator1.setForeground(new java.awt.Color(248, 248, 248));
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(109, 109, 109)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(namaKasir)
                 .addGap(18, 18, 18)
                 .addComponent(btn_logout)
@@ -96,6 +103,10 @@ public class Profile_kasir extends javax.swing.JFrame {
                     .addComponent(namaKasir)
                     .addComponent(btn_logout))
                 .addContainerGap(15, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator1)
+                .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(102, 102, 102));
@@ -429,6 +440,7 @@ public class Profile_kasir extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbluangharga;
     private javax.swing.JLabel lbluangkembali;
     private javax.swing.JLabel namaKasir;
