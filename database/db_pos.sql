@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 30, 2024 at 11:07 PM
+-- Generation Time: Jan 13, 2025 at 09:22 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -68,8 +68,8 @@ CREATE TABLE `produk` (
   `id_produk` int(11) NOT NULL,
   `nama_produk` varchar(50) NOT NULL,
   `kode_produk` varchar(10) NOT NULL,
-  `harga_beli` double NOT NULL,
-  `harga_jual` double NOT NULL,
+  `harga_beli` int(11) NOT NULL,
+  `harga_jual` int(11) NOT NULL,
   `stok` int(11) NOT NULL,
   `deskripsi` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -79,7 +79,11 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id_produk`, `nama_produk`, `kode_produk`, `harga_beli`, `harga_jual`, `stok`, `deskripsi`) VALUES
-(10, 'beras', 'p001', 15500, 18000, 25, 'beras bulog');
+(10, 'Beras', 'p001', 13500, 15000, 25, 'Beras Bulog'),
+(11, 'Minyak', 'p002', 17000, 20000, 30, 'Minyak Jernih'),
+(12, 'Gula', 'p003', 24000, 26000, 20, 'Gula Premium'),
+(13, 'Garam', 'p004', 10000, 15000, 50, 'Garam Dapur'),
+(14, 'Kecap', 'p005', 20000, 23000, 15, 'Kecap Manis');
 
 -- --------------------------------------------------------
 
@@ -113,9 +117,8 @@ INSERT INTO `profil` (`id_profil`, `id_user`, `nama_lengkap`, `alamat`, `no_telp
 CREATE TABLE `transaksi` (
   `id_transaksi` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `total_harga` int(11) NOT NULL,
   `tanggal_transaksi` datetime NOT NULL,
-  `status_pembayaran` enum('pending','completed','canceled') NOT NULL
+  `customer` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -129,8 +132,8 @@ CREATE TABLE `transaksi_detail` (
   `id_transaksi` int(11) NOT NULL,
   `id_produk` int(11) NOT NULL,
   `jumlah` int(11) NOT NULL,
-  `harga_produk` int(11) NOT NULL,
-  `sub_total` int(11) NOT NULL
+  `tanggal_transaksi` date DEFAULT NULL,
+  `harga_produk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -228,7 +231,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `profil`

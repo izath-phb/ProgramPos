@@ -4,15 +4,17 @@
  */
 package programpos;
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import static programpos.Profile_admin.viewData;
-import static programpos.Profile_admin.viewDataProduk;
 
 /**
  *
@@ -21,8 +23,14 @@ import static programpos.Profile_admin.viewDataProduk;
 public class Profile_kasir extends javax.swing.JFrame {
      Profile P;
 
-     public Profile_kasir() {
+    public Profile_kasir() {
         initComponents();
+        
+//        tabeltransaksi.getColumnModel().getColumn(0).setMinWidth(0); 
+//        tabeltransaksi.getColumnModel().getColumn(0).setMaxWidth(0); 
+        
+        enableCheckoutBtn(false);
+//        txtID.requestFocusInWindow();
 
     }
     public Profile_kasir(Profile P) {
@@ -45,7 +53,7 @@ public class Profile_kasir extends javax.swing.JFrame {
         namaKasir = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel4 = new javax.swing.JPanel();
-        JScrollPane1 = new javax.swing.JScrollPane();
+        tabeltransaksi = new javax.swing.JScrollPane();
         tabelkasir = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -60,6 +68,7 @@ public class Profile_kasir extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         lbluangkembali = new javax.swing.JLabel();
         tblcheckout = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,7 +111,7 @@ public class Profile_kasir extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(namaKasir)
                     .addComponent(btn_logout))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jSeparator1)
@@ -115,7 +124,7 @@ public class Profile_kasir extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 157, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +139,7 @@ public class Profile_kasir extends javax.swing.JFrame {
                 "ID", "Nama Produk", "Quantity", "Harga"
             }
         ));
-        JScrollPane1.setViewportView(tabelkasir);
+        tabeltransaksi.setViewportView(tabelkasir);
 
         jLabel1.setText("Produk");
 
@@ -165,7 +174,7 @@ public class Profile_kasir extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,6 +197,9 @@ public class Profile_kasir extends javax.swing.JFrame {
             }
         });
         txtuangbayar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtuangbayarKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtuangbayarKeyReleased(evt);
             }
@@ -214,7 +226,7 @@ public class Profile_kasir extends javax.swing.JFrame {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbluangkembali, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbluangharga, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 97, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -234,7 +246,7 @@ public class Profile_kasir extends javax.swing.JFrame {
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
                         .addComponent(lbluangkembali)))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tblcheckout.setBackground(new java.awt.Color(51, 51, 255));
@@ -242,6 +254,24 @@ public class Profile_kasir extends javax.swing.JFrame {
         tblcheckout.setForeground(new java.awt.Color(255, 255, 255));
         tblcheckout.setText("CHECKOUT");
         tblcheckout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblcheckout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tblcheckoutActionPerformed(evt);
+            }
+        });
+
+        jPanel7.setBackground(new java.awt.Color(102, 255, 204));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -251,13 +281,17 @@ public class Profile_kasir extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tblcheckout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addComponent(JScrollPane1)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tabeltransaksi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)))))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -268,9 +302,12 @@ public class Profile_kasir extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tabeltransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -278,7 +315,7 @@ public class Profile_kasir extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(tblcheckout, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())))
+                        .addContainerGap(12, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -289,9 +326,7 @@ public class Profile_kasir extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -377,6 +412,41 @@ public class Profile_kasir extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtuangbayarKeyReleased
 
+    private void tblcheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tblcheckoutActionPerformed
+        //simpan transaksi penjualan ke db
+//        try {
+//            //catat data transaksi
+//            Connection K = connect.konek();
+//            Statement S = K.createStatement();
+//            SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+//            String tgl = SDF.format(new Date());
+//            String Q = "INSERT INTO trasaksi (tanggal) VALUES ('"+tgl+"')";
+//            S.executeUpdate(Q);
+//            
+//            //catat data detail transaksi
+//            int row = tabeltransaksi.getRowCount();
+//            for (int i = 0; i < row; i++) {
+//                int id = Integer.parseInt(tabeltransaksi.getValueAt(row, 0).toString());
+//                int QTY = Integer.parseInt(tabeltransaksi.getValueAt(row, 2).toString());
+//                int Price = Integer.parseInt(tabeltransaksi.getValueAt(row, 3).toString());
+//                
+//            }
+//        } catch (Exception e) {
+//        }
+//        
+//        Nota N = new Nota(this, false);
+//        N.setMODEL( (DefaultTableModel) tabeltransaksi.getModel()); 
+//        N.setVisible(true); 
+    }//GEN-LAST:event_tblcheckoutActionPerformed
+
+    private void txtuangbayarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtuangbayarKeyPressed
+//        int keyCode = evt.getKeyCode();
+//        if(keyCode == KeyEvent.VK_F3){
+//            txtID.setText(""); 
+//            txtID.requestFocus();
+//        }       // TODO add your handling code here:
+    }//GEN-LAST:event_txtuangbayarKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -422,13 +492,12 @@ public class Profile_kasir extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                new Profile_kasir().setVisible(true);
+                new Profile_kasir().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane JScrollPane1;
     private javax.swing.JButton btn_logout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -440,11 +509,13 @@ public class Profile_kasir extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbluangharga;
     private javax.swing.JLabel lbluangkembali;
     private javax.swing.JLabel namaKasir;
     private javax.swing.JTable tabelkasir;
+    private javax.swing.JScrollPane tabeltransaksi;
     private javax.swing.JButton tblcheckout;
     private javax.swing.JButton tbldelete;
     private javax.swing.JTextField txtsearch;
@@ -502,6 +573,14 @@ public class Profile_kasir extends javax.swing.JFrame {
                 lbluangkembali.setText("Rp "+0);
                 tblcheckout.setEnabled(false); 
             }
+        }
+    }
+    
+     private void enableCheckoutBtn(boolean b) {
+        if(b){
+            tblcheckout.setEnabled(b); 
+        }else{
+            tblcheckout.setEnabled(b); 
         }
     }
 }
